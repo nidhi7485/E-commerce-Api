@@ -1,2 +1,2 @@
-const { creatJwt, isValidToken } = require('./jwt')
-module.exports = { creatJwt, isValidToken }
+const { creatJwt, isValidToken, attachCookiesToResponse } = require('./jwt')
+module.exports = { creatJwt, isValidToken, attachCookiesToResponse }
