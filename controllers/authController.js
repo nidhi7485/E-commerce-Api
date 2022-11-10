@@ -6,7 +6,7 @@ const {
   NotFoundError,
   BadRequestError,
 } = require('../errors')
-const { attachCookiesToResponse } = require('../utils')
+const { attachCookiesToResponse, createTokenUser } = require('../utils')
 
 const register = async (req, res) => {
   const { email, name, password } = req.body
@@ -17,7 +17,7 @@ const register = async (req, res) => {
   const firstAccount = (await User.countDocuments({})) === 0
   const role = firstAccount ? 'admin' : 'user'
   const user = await User.create({ name, email, password, role })
-  const userToken = { name: user.name, userId: user._id, role: user.role }
+  const userToken = createTokenUser(user)
   attachCookiesToResponse({ res, user: userToken })
   res.status(StatusCodes.CREATED).json({ user: userToken })
 }
@@ -35,7 +35,7 @@ const logIn = async (req, res, next) => {
   if (!isPasswordIsCorrect) {
     throw new UnauthenticatedError('invalid password')
   }
-  const userToken = { name: user.name, userId: user._id, role: user.role }
+  const userToken = createTokenUser(user)
   attachCookiesToResponse({ res, user: userToken })
   res.status(StatusCodes.CREATED).json({ user: userToken })
 }
