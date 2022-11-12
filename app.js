@@ -15,6 +15,7 @@ const connectDB = require('./db/connect')
 // routes
 const authRoute = require('./routes/authRoutes')
 const userRoute = require('./routes/userRoutes')
+const productRoute = require('./routes/productRoutes')
 // errosMiddleware
 const notFoundMiddleware = require('./middleware/not-found')
 const errorHandlerMiddleware = require('./middleware/error-handler')
@@ -35,6 +36,8 @@ app.get('/api/v1', (req, res) => {
 })
 app.use('/api/v1/auth', authRoute)
 app.use('/api/v1/users', userRoute)
+app.use('/api/v1/product', productRoute)
+
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
 const start = async () => {
