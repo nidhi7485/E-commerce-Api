@@ -37,6 +37,7 @@ const ProductSchema = new mongoose.Schema(
     },
     colors: {
       type: [String],
+      default: ['#222'],
       required: true,
     },
     color: {
@@ -44,7 +45,7 @@ const ProductSchema = new mongoose.Schema(
       required: true,
     },
     featured: {
-      type: boolean,
+      type: Boolean,
       default: false,
     },
     freeShipping: {
