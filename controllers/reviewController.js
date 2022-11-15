@@ -35,7 +35,7 @@ const getAllReview = async (req, res) => {
     path: 'product',
     select: 'name company price',
   })
-  res.status(StatusCodes.OK).json({ review })
+  res.status(StatusCodes.OK).json({ review, count: review.length })
 }
 const getSingleReview = async (req, res) => {
   const { id: reviewId } = req.params
